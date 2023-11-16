@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:/Users/weed1/Documents/GitHub/optimal_noise_reduction/cmake-build-debug/
+cmake_ninja_workdir = C$:/Users/weed1/Documents/GitHub/zoo_optimal_noise_reduction/cmake-build-debug/
 # =============================================================================
 # Object build statements for EXECUTABLE target optimal_noise_reduction
 
@@ -49,10 +49,10 @@ cmake_ninja_workdir = C$:/Users/weed1/Documents/GitHub/optimal_noise_reduction/c
 
 build cmake_object_order_depends_target_optimal_noise_reduction: phony || CMakeFiles/optimal_noise_reduction.dir
 
-build CMakeFiles/optimal_noise_reduction.dir/src/main.c.obj: C_COMPILER__optimal_noise_reduction_Debug C$:/Users/weed1/Documents/GitHub/optimal_noise_reduction/src/main.c || cmake_object_order_depends_target_optimal_noise_reduction
+build CMakeFiles/optimal_noise_reduction.dir/src/main.c.obj: C_COMPILER__optimal_noise_reduction_Debug C$:/Users/weed1/Documents/GitHub/zoo_optimal_noise_reduction/src/main.c || cmake_object_order_depends_target_optimal_noise_reduction
   DEP_FILE = CMakeFiles\optimal_noise_reduction.dir\src\main.c.obj.d
   FLAGS = -g -std=gnu11
-  INCLUDES = -IC:/Users/weed1/Documents/GitHub/optimal_noise_reduction/src
+  INCLUDES = -IC:/Users/weed1/Documents/GitHub/zoo_optimal_noise_reduction/src
   OBJECT_DIR = CMakeFiles\optimal_noise_reduction.dir
   OBJECT_FILE_DIR = CMakeFiles\optimal_noise_reduction.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\optimal_noise_reduction.dir\
@@ -82,7 +82,7 @@ build optimal_noise_reduction.exe: C_EXECUTABLE_LINKER__optimal_noise_reduction_
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\weed1\Documents\GitHub\optimal_noise_reduction\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\weed1\Documents\GitHub\zoo_optimal_noise_reduction\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -93,7 +93,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\weed1\Documents\GitHub\optimal_noise_reduction\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\weed1\Documents\GitHub\optimal_noise_reduction -BC:\Users\weed1\Documents\GitHub\optimal_noise_reduction\cmake-build-debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\weed1\Documents\GitHub\zoo_optimal_noise_reduction\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\weed1\Documents\GitHub\zoo_optimal_noise_reduction -BC:\Users\weed1\Documents\GitHub\zoo_optimal_noise_reduction\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -111,7 +111,7 @@ build optimal_noise_reduction: phony optimal_noise_reduction.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/weed1/Documents/GitHub/optimal_noise_reduction/cmake-build-debug
+# Folder: C:/Users/weed1/Documents/GitHub/zoo_optimal_noise_reduction/cmake-build-debug
 
 build all: phony optimal_noise_reduction.exe
 

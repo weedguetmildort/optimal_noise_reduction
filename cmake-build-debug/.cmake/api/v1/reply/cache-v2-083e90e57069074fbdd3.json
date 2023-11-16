@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/weed1/Documents/GitHub/optimal_noise_reduction/cmake-build-debug"
+			"value" : "c:/Users/weed1/Documents/GitHub/zoo_optimal_noise_reduction/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -479,7 +479,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/weed1/Documents/GitHub/optimal_noise_reduction"
+			"value" : "C:/Users/weed1/Documents/GitHub/zoo_optimal_noise_reduction"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1095,7 +1095,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/weed1/Documents/GitHub/optimal_noise_reduction/cmake-build-debug"
+			"value" : "C:/Users/weed1/Documents/GitHub/zoo_optimal_noise_reduction/cmake-build-debug"
 		},
 		{
 			"name" : "optimal_noise_reduction_IS_TOP_LEVEL",
@@ -1119,7 +1119,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/weed1/Documents/GitHub/optimal_noise_reduction"
+			"value" : "C:/Users/weed1/Documents/GitHub/zoo_optimal_noise_reduction"
 		}
 	],
 	"kind" : "cache",
