@@ -12,7 +12,7 @@
 
 #define MAX_ANIMALS 20
 #define EMPTY 0
-#define UNPLACED 1
+#define UNPLACED -1
 
 // Typedef declaration
 typedef struct edge_t edge_t;
@@ -61,32 +61,33 @@ struct solver_t {
 };
 
 // read in the constraint graph
-//
 void read_constraints(constraints_t *cons)
 {
-    int             i, j;                   // loop indices
-    int             ncons;                  // # constraints
-    int             an0, an1;               // animal indices
-    int             dist;                   // distance between them
+    // loop indices
+    int i, j;
+    // # constraints
+    int ncons;
+    // animal indices
+    int an0, an1;
+    // distance between them
+    int dist;
 
     scanf("%d %d\n", &cons->animals, &ncons);
 
     // set defaults: everything is unconstrained
-    //
     for (int i = 0; i < MAX_ANIMALS; i++) {
         cons -> forced[i] = false;
         cons -> graph[i].n = 0;
     }
 
     // read in the constraint pairs
-    //
     for (i = 0; i < ncons; i++) {
         scanf("%d %d %d", &an0, &an1, &dist);
-
-        an0--;  // animals are zero-based
+        // animals are zero-based
+        an0--;
         an1--;
-
-        dist++; // (n+1)-(n)=1 but this is a constraint of zero
+        // (n+1)-(n)=1 but this is a constraint of zero
+        dist++;
 
         cons -> graph[an0].edges[cons -> graph[an0].n].peer = an1;
         cons -> graph[an0].edges[cons -> graph[an0].n].dist = dist;
@@ -102,10 +103,10 @@ void read_constraints(constraints_t *cons)
 }
 
 // clear out the solver state
-//
 void init_solver(constraints_t *cons, solver_t *solver)
 {
-    int             i;                      // loop index
+    // loop index
+    int i;
 
     solver -> cons = cons;
     solver -> slot = 0;
@@ -119,7 +120,6 @@ void init_solver(constraints_t *cons, solver_t *solver)
 }
 
 // put an animal in a cage
-//
 void cage_animal(struct solver_t *solver, int cage, int anim)
 {
     solver -> placed_stk[solver -> nplaced++] = anim;
@@ -128,11 +128,12 @@ void cage_animal(struct solver_t *solver, int cage, int anim)
 }
 
 // free the most recently caged animal
-//
 void free_animal(struct solver_t *solver)
 {
-    int             anim;                   // animal being free'd
-    int             cage;                   //   and the cage it's currently in
+    // animal being free'd
+    int anim;
+    //   and the cage it's currently in
+    int cage;
 
     anim = solver -> placed_stk[--solver -> nplaced];
     cage = solver -> animcage[anim];
@@ -143,7 +144,6 @@ void free_animal(struct solver_t *solver)
 
 // remove animals from cages based on the stack until
 // the stack pointer is stkptr
-//
 void pop_goes_the_weasels(struct solver_t *solver, int stkptr)
 {
     while (solver -> nplaced > stkptr) {
@@ -152,15 +152,20 @@ void pop_goes_the_weasels(struct solver_t *solver, int stkptr)
 }
 
 // add constraints for the animal at the given slot
-//
 bool add_animal_constraints(struct solver_t *solver, int stkptr)
 {
-    int             i;                      // loop index
-    int             anim;                   // animal under consideration
-    edge_set_t      *edges;                 //   and its edge set
-    int             peer;                   // animal which shares constraint
-    int             peercage;               //   the cage it's in
-    int             dist;                   //   and the required distance
+    // loop index
+    int i;
+    // animal under consideration
+    int anim;
+    //   and its edge set
+    edge_set_t *edges;
+    // animal which shares constraint
+    int peer;
+    //   the cage it's in
+    int peercage;
+    //   and the required distance
+    int dist;
 
     anim = solver -> cages[solver -> slot];
     edges = &solver -> cons -> graph[anim];
@@ -171,7 +176,6 @@ bool add_animal_constraints(struct solver_t *solver, int stkptr)
         peercage = solver -> animcage[peer];
 
         // if the peer is already placed, verify it satisfies constraints
-        //
         if (peercage != UNPLACED) {
             if (abs(solver -> slot - peercage) != dist) {
                 pop_goes_the_weasels(solver, stkptr);
@@ -182,7 +186,6 @@ bool add_animal_constraints(struct solver_t *solver, int stkptr)
 
         // otherwise, see if we can place the peer
         // we place left to right, so we only need to consider higher cages
-        //
         peercage = solver -> slot + dist;
         if (
                 peercage >= solver -> cons -> animals ||
@@ -198,18 +201,16 @@ bool add_animal_constraints(struct solver_t *solver, int stkptr)
 }
 
 // place an animal at the current slot in the solver, ensuring any
-// direct constraints are satisfied.
-//
+// direct constraints are satisfied
 bool place_animal_with_constraints(struct solver_t *solver, int anim)
 {
     // stack pointer for cleanup
-    int             stkptr = solver -> nplaced;
+    int stkptr = solver -> nplaced;
 
     cage_animal(solver, solver -> slot, anim);
 
     // note that this will clean up the animal we just placed, if
     // constraints fail, because we put it on the stack
-    //
     return add_animal_constraints(solver, stkptr);
 }
 
@@ -218,24 +219,29 @@ bool place_animal_with_constraints(struct solver_t *solver, int anim)
 //
 bool solve(struct solver_t *solver)
 {
-    constraints_t   *cons = solver -> cons; // the constraint graph
-    int             i;                      // loop index
-    int             anim;                   // the animal we're trying to place
-    int             dist;                   // constraint for the animal
-    bool            tried_unforced = false; // at least one unforced animal has been tried and failed
-    bool            cons_fail;              // true on constraint failure
-    int             stkptr;                 // save depth of stack when placing multiple animals
+    // the constraint graph
+    constraints_t   *cons = solver -> cons;
+    // loop index
+    int i;
+    // the animal we're trying to place
+    int anim;
+    // constraint for the animal
+    int dist;
+    // at least one unforced animal has been tried and failed
+    bool tried_unforced = false;
+    // true on constraint failure
+    bool cons_fail;
+    // save depth of stack when placing multiple animals
+    int stkptr;
 
     // base case: we found a solution
-    //
     if (solver -> nplaced == solver -> cons -> animals) {
         return true;
     }
 
     // if there's already a constraint-forced animal in this slot,
     // ensure any of its constraints that aren't already there are
-    // placed.
-    //
+    // placed
     if (solver -> cages[solver -> slot] != EMPTY) {
         anim = solver -> cages[solver -> slot];
 
@@ -262,7 +268,6 @@ bool solve(struct solver_t *solver)
 
         // if we've already tried an unconstrained animal, no point
         // trying another one.
-        //
         if (!cons -> forced[anim]) {
             if (tried_unforced) {
                 continue;
@@ -271,7 +276,6 @@ bool solve(struct solver_t *solver)
             }
 
             // just do the unconstrained case here
-            //
             cage_animal(solver, solver -> slot, anim);
             solver -> slot++;
 
@@ -287,7 +291,6 @@ bool solve(struct solver_t *solver)
         }
 
         // we need to add an animal that has constraints
-        //
         stkptr = solver -> nplaced;
         if (!place_animal_with_constraints(solver, anim)) {
             continue;
@@ -307,9 +310,12 @@ bool solve(struct solver_t *solver)
 
 int main()
 {
-    int             i;                      // loop index
-    constraints_t   cons;                   // the constraints
-    solver_t        solver;                 // the solver state
+    // loop index
+    int i;
+    // the constraints
+    constraints_t cons;
+    // the solver state
+    solver_t solver;
 
     read_constraints(&cons);
     init_solver(&cons, &solver);
@@ -317,7 +323,6 @@ int main()
     if (solve(&solver)) {
         for (i = 0; i < cons.animals; i++) {
             // NB solution expects 1-based animals
-            //
             printf("%d ", solver.cages[i] + 1);
         }
         printf("\n");
